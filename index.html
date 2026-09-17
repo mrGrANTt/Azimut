@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Матрица сравнения образовательных программ</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <div class="page-header__text">
+        <h1 class="page-header__title">Матрица сравнения программ</h1>
+        <p class="page-header__subtitle" id="facultyFullTitle">Образовательные программы</p>
+      </div>
+
+      <div class="page-header__actions">
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Переключить тему" title="Переключить тему">
+          <span class="theme-toggle__icon" aria-hidden="true">☾</span>
+        </button>
+      </div>
+    </header>
+
+    <section class="control-panel">
+      <div class="control-panel__group">
+        <span class="control-panel__label">Категория дисциплин</span>
+        <div class="segmented" id="categoryFilter"></div>
+      </div>
+
+      <div class="control-panel__group">
+        <span class="control-panel__label">Курс / семестр</span>
+        <div class="segmented" id="courseFilter"></div>
+      </div>
+
+      <label class="control-panel__checkbox">
+        <input type="checkbox" id="diffOnlyToggle" />
+        <span class="control-panel__checkbox-box" aria-hidden="true"></span>
+        <span>Показать только различия</span>
+      </label>
+
+      <label class="control-panel__checkbox">
+        <input type="checkbox" id="highlightDiffToggle" checked />
+        <span class="control-panel__checkbox-box" aria-hidden="true"></span>
+        <span>Подсветить сильные различия</span>
+      </label>
+    </section>
+
+    <section class="selection-help" aria-label="Как читать показатели">
+      <div class="selection-help__title">Как читать сравнение</div>
+      <div class="selection-help__items">
+        <div class="selection-help__item"><strong>Профильная нагрузка (Математика + IT)</strong><span>Сумма ЗЕТ по специализированным математическим и IT-дисциплинам.</span></div>
+        <div class="selection-help__item"><strong>ФГОС / Гуманитарный блок</strong><span>Базовая общеобразовательная нагрузка: гуманитарные, социально-правовые и обязательные дисциплины.</span></div>
+        <div class="selection-help__item selection-help__item--zet"><strong>ЗЕТ <button class="info-tip" id="zetInfoButton" type="button" aria-expanded="false" aria-controls="zetInfoPopup" aria-label="Что такое ЗЕТ">?</button></strong><span>Зачетная единица трудоемкости — единица объема учебной нагрузки.</span><div class="info-tip__popup" id="zetInfoPopup" role="tooltip" hidden>1 ЗЕТ = 36 академических часов. Это стандартная мера трудоемкости предмета, включающая лекции, практики и самостоятельную работу.</div></div>
+      </div>
+    </section>
+
+    <section class="mobile-program-picker" id="mobileProgramPicker" aria-label="Выбор программ на мобильном устройстве">
+      <div class="mobile-program-picker__head">
+        <strong>Программы для сравнения</strong>
+        <span>Можно выбрать до 3 программ</span>
+      </div>
+      <div class="mobile-program-picker__slots" id="mobileProgramSlots"></div>
+    </section>
+
+    <section class="uni-cards" id="uniCards" aria-label="Сводная информация по выбранным программам"></section>
+
+    <section class="table-section">
+      <div class="table-hint">В шапке таблицы выберите программу для каждого слота. Пустые слоты можно добавить кнопкой «+ Добавить программу».</div>
+
+      <div class="program-empty-state" id="programEmptyState" hidden>
+        <h2>Не выбрана ни одна программа для сравнения</h2>
+        <p>Добавьте хотя бы одну программу, чтобы увидеть учебные дисциплины и сравнение.</p>
+        <button class="add-program add-program--empty" id="emptyAddProgram" type="button">+ Добавить программу</button>
+      </div>
+
+      <div id="comparisonContent">
+
+      <div class="table-scroll" id="tableScroll">
+        <table class="matrix-table" id="matrixTable">
+          <thead id="matrixHead"></thead>
+          <tbody id="matrixBody"></tbody>
+        </table>
+      </div>
+
+        <div class="cards-view" id="cardsView" aria-label="Карточки дисциплин"></div>
+
+        <p class="table-empty" id="tableEmpty" hidden>
+          По выбранным фильтрам дисциплин не найдено.
+        </p>
+      </div>
+    </section>
+
+    <div class="info-modal" id="admissionInfoModal" hidden aria-hidden="true">
+      <div class="info-modal__backdrop" data-close-admission-info></div>
+      <section class="info-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="admissionInfoTitle">
+        <button class="info-modal__close" type="button" data-close-admission-info aria-label="Закрыть">×</button>
+        <h2 id="admissionInfoTitle">Дополнительные баллы, БВИ за олимпиады</h2>
+        <div id="admissionInfoContent"></div>
+      </section>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/admission-data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
