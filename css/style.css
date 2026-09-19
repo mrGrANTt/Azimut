@@ -707,3 +707,22 @@ body.modal-open { overflow: hidden; }
     border-radius: 14px;
   }
 }
+
+/* ==========================================================================
+   Fix: sticky-колонка «Предмет» должна оставаться непрозрачной
+   при включённой подсветке различий (.is-diff), иначе при горизонтальной
+   прокрутке под ней просвечивают ячейки с ЗЕТ.
+   Цвет подсветки накладывается градиентом поверх непрозрачного фона.
+   ========================================================================== */
+.matrix-table tbody tr:not(.matrix-table__category-row) td.matrix-table__subject-title {
+  background-color: var(--color-surface) !important;
+  background-image: none !important;
+}
+
+.matrix-table tbody tr.is-diff:not(.matrix-table__category-row) td.matrix-table__subject-title {
+  background-image: linear-gradient(var(--color-diff), var(--color-diff)) !important;
+}
+
+.matrix-table tbody tr:not(.matrix-table__category-row):hover td.matrix-table__subject-title {
+  background-color: color-mix(in srgb, var(--color-accent) 6%, var(--color-surface)) !important;
+}
