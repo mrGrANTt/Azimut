@@ -504,7 +504,10 @@
     });
 
     const hasData = subjects.length > 0;
-    el.tableScroll.hidden = !hasData;
+
+    // Поиск находится в шапке таблицы. Не скрываем сам tableScroll,
+    // иначе при отсутствии результатов пропадает и поле поиска.
+    el.tableScroll.hidden = false;
     el.tableEmpty.hidden = hasData;
   }
 
@@ -678,8 +681,11 @@
     const body = document.createElement('div');
     body.className = 'admission-section__body';
     admissionLines(text).forEach(line => {
-      if (line === 'Одно из:') {
-        return;
+      if (/^Одно из:\s*$/i.test(line)) {
+        const h = document.createElement('h4');
+        h.className = 'admission-section__choice-heading';
+        h.textContent = 'ОДНО ИЗ';
+        body.appendChild(h);
       } else if (/^\d+\s*балл(?:а|ов)?\s*:/i.test(line)) {
         const h = document.createElement('h4');
         h.textContent = line;
